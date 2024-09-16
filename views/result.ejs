@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User data</title>
+    <style>
+        table,tr,td,th{
+            border: 1px solid black;
+        }
+        /* form{
+            margin: 15px;
+            display: inline;
+        } */
+    </style>
+</head>
+<body>
+    <form method="get" action="/user">
+        <button>Home</button>
+    </form>
+    <table>
+        <tr>
+           <th>Id</th>
+           <th>Username</th>
+           <th>E-mail</th>
+        </tr>
+       <% if(result.length>0) {%> 
+        <% for(let i=0;i<result.length;i++) {%>
+        <tr>
+            <td><%= result[i].id %></td>
+            <td><%= result[i].username %></td>
+            <td><%= result[i].email %></td>
+            <td>
+                <form method ="get" action="/user/<%= result[i].id %>/edit">
+                    <button>Edit username</button>
+                </form>
+            </td>
+            <td>
+                <form method ="get" action="/user/<%=result[i].id%>">
+                    <button>Remove Account</button>
+                </form>
+            </td>
+        </tr>
+        <% } %>
+        <% }else {%>
+            <p>Not found</p>
+        <%}  %>
+
+    </table>
+</body>
+</html>
